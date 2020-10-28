@@ -1,44 +1,57 @@
 package ca.carleton.boatingcollisionidentificationsystem;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    };
+    Button btn;
+    ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
+        btn = (Button) findViewById(R.id.button);
+        image = (ImageView) findViewById(R.id.image);
 
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(this));
+        }
+
+        final Python py = Python.getInstance();
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PyObject scriptObj = py.getModule("lidarsoftware"); // Read python script
+                PyObject funcObj = scriptObj.callAttr("plot");    // Invoke plot() function
+
+                try {
+                    String str = funcObj.toString();
+                    byte[] data = android.util.Base64.decode(str, Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                    image.setImageBitmap(bitmap);
+                }
+                catch (Exception e){
+                    System.out.println(e);
+                }
+            }
+        });
+    }
 }
