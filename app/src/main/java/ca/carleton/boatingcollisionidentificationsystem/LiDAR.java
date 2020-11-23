@@ -3,31 +3,27 @@ package ca.carleton.boatingcollisionidentificationsystem;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 
-public class MainActivity extends AppCompatActivity {
-
+public class LiDAR extends MainMenu {
     Button btn;
     ImageView image;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.lidar);
 
-        btn = (Button) findViewById(R.id.button);
+        btn = (Button) findViewById(R.id.button2);
         image = (ImageView) findViewById(R.id.image);
 
         if (!Python.isStarted()) {
@@ -47,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     byte[] data = android.util.Base64.decode(str, Base64.DEFAULT);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                     image.setImageBitmap(bitmap);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     System.out.println(e);
                 }
             }
