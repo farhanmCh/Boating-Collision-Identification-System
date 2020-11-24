@@ -40,12 +40,14 @@ public class LiDAR extends MainMenu {
                 PyObject funcObj = scriptObj.callAttr("plot");    // Invoke plot() function
 
 
-                String str = funcObj.toString();
-                byte[] data = android.util.Base64.decode(str, Base64.DEFAULT);
-                Bitmap bitmap = null;
-                bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                image.setImageBitmap(bitmap);
-
+                try {
+                    String str = funcObj.toString();
+                    byte[] data = android.util.Base64.decode(str, Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                    image.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
             }
         });
     }
