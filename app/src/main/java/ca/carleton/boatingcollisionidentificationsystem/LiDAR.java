@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chaquo.python.PyObject;
@@ -24,7 +25,7 @@ public class LiDAR extends MainMenu {
         setContentView(R.layout.lidar);
 
         btn = (Button) findViewById(R.id.button2);
-        image = (ImageView) findViewById(R.id.image);
+        image = (ImageView) findViewById(R.id.image2);
 
         if (!Python.isStarted()) {
             Python.start(new AndroidPlatform(this));
@@ -37,6 +38,7 @@ public class LiDAR extends MainMenu {
             public void onClick(View view) {
                 PyObject scriptObj = py.getModule("lidarsoftware"); // Read python script
                 PyObject funcObj = scriptObj.callAttr("plot");    // Invoke plot() function
+
 
                 try {
                     String str = funcObj.toString();

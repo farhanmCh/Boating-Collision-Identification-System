@@ -32,7 +32,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
         Toolbar toolbar = findViewById(R.id.toolbar);                                                       // ToolBar
         setSupportActionBar(toolbar);
-        InitiateConnection();
+        //InitiateConnection();
     }
     public void onClick(View v){
         switch (v.getId()){
