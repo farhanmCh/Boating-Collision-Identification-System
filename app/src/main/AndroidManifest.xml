@@ -21,10 +21,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".home_2"></activity>
-        <activity android:name=".MainMenu"></activity>
         <activity android:name=".LiDAR"></activity>
         <activity android:name=".AppSecurity"></activity>
         <activity android:name=".AppSettings"></activity>
+        <activity android:name=".MainMenu"></activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
