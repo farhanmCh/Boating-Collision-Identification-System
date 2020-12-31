@@ -1,18 +1,29 @@
-import numpy as np 
+import numpy as np
 import matplotlib.pyplot as plt
 import io
 import cv2
 from PIL import Image
 import base64
+import regex as re
+import ast
 
-def plot():
-    # Random XYZ data
-    xyz=np.array(np.random.uniform(-20, 20, (9000,50)))
+def plot(data):
+    '''
+    This function takes in an array of data points in the form of string and converts it to a numpy array
+    that is used to generate a depth image, which is is then converted to a byte string
+    :param data:
+     Takes in array of data points in string format
+    :return:
+    Returns a byte string of the of the image constructed using the data points in the array
+    '''
 
     # Plot the data points
     fig = plt.figure(figsize=(6,4))
     ay = fig.subplots(1)
-    p = ay.scatter(xyz[:,0], xyz[:,1], c=xyz[:,2], cmap='jet', s=1) 
+    ls = re.sub('\s+', ' ', data)
+    a = np.array(ast.literal_eval(ls))
+    depth = a[0].astype(np.uint8)
+    p = ay.matshow(depth, cmap='jet')
     plt.colorbar(p, aspect=40, pad=0.02)
     fig.tight_layout()
     plt.show()
