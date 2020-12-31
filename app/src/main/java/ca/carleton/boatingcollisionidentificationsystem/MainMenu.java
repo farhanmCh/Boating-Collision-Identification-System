@@ -32,7 +32,6 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     public BluetoothSocket Socket = null;
     public InputStream inputStream;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,19 +49,13 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
         Toolbar toolbar = findViewById(R.id.toolbar);                                                       // ToolBar
         setSupportActionBar(toolbar);
-        BluetoothDevice hc05 = mBluetoothAdapter.getRemoteDevice("00:14:03:05:0A:0D");
+        BluetoothDevice hc05 = mBluetoothAdapter.getRemoteDevice("00:14:03:05:08:80");
 
 
         MainMenu.ConnectThread mConnectThread = new MainMenu.ConnectThread(hc05);
         mConnectThread.start();
-
-
-        //InitiateConnection();
-
-
-
-
     }
+
     public void onClick(View v){
         char[] test = {'\n','b','a'};
         switch (v.getId()){
@@ -147,17 +140,25 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         public void run() {
             byte[] buffer = new byte[1024];  // buffer store for the stream
             int bytes; // bytes returned from read()
-
+            String incomingMessage = "";
             // Keep listening to the InputStream until an exception occurs
             while (true) {
                 try {
+                    String msg = "";
                     // Read from the InputStream
                     bytes = mmInputStream.read(buffer);        // Get number of bytes and message in "buffer"
-                    String incomingMessage = new String(buffer,0,bytes);
+                    incomingMessage = new String(buffer,0,bytes);
                     Log.d(TAG, "InputStream: " + incomingMessage);
 
+                    while (!incomingMessage.contains("#")){
+                        msg = msg.concat(incomingMessage);
+                        bytes = mmInputStream.read(buffer);
+                        incomingMessage = new String(buffer,0,bytes);
+                        Log.d(TAG, "InputStream: " + incomingMessage);
+                    }
+                    Log.d(TAG, "DataStream " + msg);
                     Intent incomingMessageIntent = new Intent(MainMenu.this, LiDAR.class);
-                    incomingMessageIntent.putExtra("theMessage", incomingMessage);
+                    incomingMessageIntent.putExtra("theMessage", msg);
                     startActivity(incomingMessageIntent);
                     //LocalBroadcastManager.getInstance(mContext).sendBroadcast(incomingMessageIntent);
                 } catch (IOException e) {
@@ -168,52 +169,4 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     }
 
 }
-    /*public void InitiateConnection(){
-        //Bluetooth Adapter in the phone
-        System.out.println(Adapter.getBondedDevices());
-
-
-
-        //HC-05 Object
-        BluetoothDevice hc05 = Adapter.getRemoteDevice("00:14:03:05:0A:0D");
-        System.out.println(hc05.getName());
-
-        //Bluetooth Connection
-
-        try {
-            if (Socket == null){
-                Socket = hc05.createInsecureRfcommSocketToServiceRecord(mUUID);
-                BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
-
-                Socket.connect();
-                System.out.println(Socket.isConnected());
-                Toast.makeText(MainMenu.this, "Device Connected", Toast.LENGTH_LONG).show();
-
-
-
-            } else{
-                Toast.makeText(MainMenu.this, "Device Unable to Connect", Toast.LENGTH_LONG).show();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-    //Send Data to bluetooth Module
-    /*private void write(char[] ch) {
-
-        try {
-
-            for (char c : ch) {
-                new DataOutputStream(Socket.getOutputStream()).writeByte(c);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-    //Receive Data from bluetooth Module
-    /*public void read(){
-
-    }*/
 
