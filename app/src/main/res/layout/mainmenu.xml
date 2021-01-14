@@ -5,6 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/armcontrol"
+        android:layout_width="354dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/armcontrollertab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="421dp"
@@ -20,13 +31,11 @@
         android:id="@+id/lockapp"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="40dp"
         android:background="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.583" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/mainmonitor"
@@ -54,17 +63,6 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainmonitor" />
-
-    <Button
-        android:id="@+id/armcontrol"
-        android:layout_width="354dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/armcontrollertab"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/stats"
