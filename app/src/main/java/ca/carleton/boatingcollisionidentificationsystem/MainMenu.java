@@ -41,6 +41,8 @@ public class MainMenu extends LiDAR implements View.OnClickListener {
         buttonSettings.setOnClickListener(this);
         Button buttonArmControl = (Button) findViewById(R.id.armcontrol);
         buttonArmControl.setOnClickListener(this);
+        Button buttonMaps = (Button) findViewById(R.id.gps);
+        buttonMaps.setOnClickListener(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);                                                       // ToolBar
         setSupportActionBar(toolbar);
@@ -78,8 +80,12 @@ public class MainMenu extends LiDAR implements View.OnClickListener {
                 Intent intent3 = new Intent(MainMenu.this, ArmControlCentre.class);
                 startActivity(intent3);
                 break;
+
+             //Maps
+            case R.id.map:
+                Intent intent4 = new Intent(MainMenu.this, Maps.class);
+                startActivity(intent4);
             default:
-                mConnectThread.cancel();
                 break;
         }
     }
@@ -116,7 +122,6 @@ public class MainMenu extends LiDAR implements View.OnClickListener {
                 e.printStackTrace();
             }
             mConnectedthreadARM.start();
-            
         }
 
         public void cancel(){

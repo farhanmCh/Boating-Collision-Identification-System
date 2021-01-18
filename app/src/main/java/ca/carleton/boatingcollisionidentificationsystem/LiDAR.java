@@ -33,6 +33,7 @@ public class LiDAR extends ArmControlCentre {
     public static String data;
     String arr = null;
     public String finalMsg;
+    public static Python py = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class LiDAR extends ArmControlCentre {
             Python.start(new AndroidPlatform(this));
         }
 
-        final Python py = Python.getInstance();
+        py = Python.getInstance();
 
         /*
         PyObject scriptObj = py.getModule("lidarsoftware"); // Read python script
@@ -165,11 +166,6 @@ public class LiDAR extends ArmControlCentre {
                         public void run() {
                             ReceivedData().setText(finalMsg);
                             Log.d("pointcloud", finalMsg);
-                        }
-                    });
-                    /*runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
                             PyObject scriptObj = py.getModule("lidarsoftware"); // Read python script
                             PyObject funcObj = scriptObj.callAttr("plot", finalMsg);    // Invoke plot() function
                             try {
@@ -183,8 +179,8 @@ public class LiDAR extends ArmControlCentre {
                             catch (Exception e){
                                 System.out.println(e);
                             }
-                        }
-                    });*/
+                            }
+                    });
                 } catch (IOException e) {
                     break;
                 }
