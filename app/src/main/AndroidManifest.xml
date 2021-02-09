@@ -45,6 +45,7 @@
         <activity android:name=".AppSecurity" />
         <activity android:name=".AppSettings" />
         <activity android:name=".MainMenu" />
+        <activity android:name=".About" />
         <activity android:name=".ArmControlCentre" >
             <intent-filter>
                 <action android:name="com.boating-collision-identification-system.DIRECTION" />
