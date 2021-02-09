@@ -63,9 +63,12 @@
         android:id="@+id/textView5"
         android:layout_width="370dp"
         android:layout_height="397dp"
+        android:layout_marginTop="100dp"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae justo eget magna fermentum iaculis eu non diam. Sit amet mattis vulputate enim nulla aliquet porttitor. Arcu cursus euismod quis viverra nibh cras pulvinar mattis.   Nisl pretium fusce id velit ut tortor. Ultrices tincidunt arcu non sodales. Scelerisque felis imperdiet proin fermentum leo vel orci. Urna et pharetra pharetra massa massa ultricies mi. Penatibus et magnis dis parturient montes. Cras ornare arcu dui vivamus arcu felis bibendum ut tristique. Et malesuada fames ac turpis.  	 Faucibus scelerisque eleifend donec pretium vulputate sapien nec. Egestas tellus rutrum tellus pellentesque eu. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus.  "
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="158dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <ImageView
         android:id="@+id/imageView10"
