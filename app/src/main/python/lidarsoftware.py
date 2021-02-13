@@ -22,9 +22,12 @@ def plot(data):
     ay = fig.subplots(1)
     ls = re.sub('\s+', ' ', data)
     a = np.array(ast.literal_eval(ls))
-    depth = a[0].astype(np.uint8)
+    depth = a.astype(np.uint8)
+    p2 = ay.matshow(a, cmap='jet') # get original values for colorbar
     p = ay.matshow(depth, cmap='jet')
-    plt.colorbar(p, aspect=40, pad=0.02)
+    plt.axis('off') # Remove axis
+
+    plt.colorbar(p2, aspect=40, pad=0.02)
     fig.tight_layout()
     plt.show()
     fig.canvas.draw()
