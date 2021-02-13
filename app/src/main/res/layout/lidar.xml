@@ -64,35 +64,70 @@
         android:id="@+id/image2"
         android:layout_width="400dp"
         android:layout_height="400dp"
+        android:layout_marginTop="96dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_launcher_background"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="12dp"
         android:text="Plot"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.877" />
+        app:layout_constraintTop_toBottomOf="@+id/image2" />
+
+    <TextView
+        android:id="@+id/DetectedObject"
+        android:layout_width="47dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="48dp"
+        android:text="Object:"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/image2"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/Newmessage"
-        android:layout_width="113dp"
-        android:layout_height="38dp"
+        android:layout_width="61dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="TextView"
+        android:textColor="#10FF00"
+        app:layout_constraintStart_toEndOf="@+id/Proximity"
+        app:layout_constraintTop_toBottomOf="@+id/DetectedObject" />
+
+    <TextView
+        android:id="@+id/ObjectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="48dp"
         android:text="TextView"
         android:textColor="#10FF00"
         app:layout_constraintBottom_toTopOf="@+id/image2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/DetectedObject" />
+
+    <TextView
+        android:id="@+id/Proximity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Proximity:"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+        app:layout_constraintTop_toBottomOf="@+id/DetectedObject" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

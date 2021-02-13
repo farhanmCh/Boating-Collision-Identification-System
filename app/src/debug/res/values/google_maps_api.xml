@@ -1,0 +1,24 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=93:44:94:ED:D6:37:CC:A9:E1:87:7E:E0:00:DA:F7:6F:03:EB:6E:40%3Bca.carleton.boatingcollisionidentificationsystem
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    ca.carleton.boatingcollisionidentificationsystem
+
+    SHA-1 certificate fingerprint:
+    93:44:94:ED:D6:37:CC:A9:E1:87:7E:E0:00:DA:F7:6F:03:EB:6E:40
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">THE KEY</string>
+</resources>
