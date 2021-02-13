@@ -20,10 +20,10 @@ import java.util.UUID;
 
 
 public class BluetoothService extends Service {
-    public String TAG = "LiDAR";
+    public String TAG = "BlueTooth";
     public static final UUID mUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     public static BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-    public BluetoothDevice hc05 = mBluetoothAdapter.getRemoteDevice("00:14:03:05:0A:0D");
+    public BluetoothDevice hc05 = mBluetoothAdapter.getRemoteDevice("00:14:03:05:08:80");
     public BluetoothSocket mSocket = null;
     public InputStream mmInputStream;
     public OutputStream mmOutputStream;
@@ -93,11 +93,10 @@ public class BluetoothService extends Service {
                         }
                         Log.d(TAG, "DataStream " + msg);
                         Intent incomingMessageIntent = new Intent(BluetoothService.this, LiDAR.class);
-                        incomingMessageIntent.putExtra("theMessage", incomingMessage);
                         incomingMessageIntent.putExtra("theMessage", msg);
 
                         incomingMessageIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        incomingMessageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        incomingMessageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //Clear top of the stack activity (previous LiDAR page)
                         startActivity(incomingMessageIntent);
 
                     } catch (IOException e) {
