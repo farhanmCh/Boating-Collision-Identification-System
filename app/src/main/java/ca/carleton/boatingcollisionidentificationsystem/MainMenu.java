@@ -25,6 +25,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
             startActivityForResult(enableBtIntent,1);
         }
 
+
+
         Button buttonMonitor = (Button) findViewById(R.id.mainmonitor);
         buttonMonitor.setOnClickListener(this);
         Button buttonSettings = (Button) findViewById(R.id.AppSet);

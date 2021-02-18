@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.chaquo.python'
 
 android {
+    aaptOptions {
+        noCompress "tflite"
+    }
     compileSdkVersion 30
     defaultConfig {
         applicationId "ca.carleton.boatingcollisionidentificationsystem"
@@ -41,10 +44,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation('org.tensorflow:tensorflow-lite:0.0.0-nightly') { changing = true }
+    implementation ('org.tensorflow:tensorflow-lite-metadata:0.0.0-nightly') { changing = true }
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
