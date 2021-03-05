@@ -13,11 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 public class home_2 extends AppCompatActivity {
     public Button buttonUnlock;
 
+    //Actual PIN number
+    public String password;
     // User Entered PIN Number
     EditText PinNumber;
 
-    //Actual PIN number
-    String password;
+
+
 
     @Override
     protected void onCreate (Bundle savedInstanceState){

@@ -22,7 +22,7 @@
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="37dp"
-        android:layout_height="153dp"
+        android:layout_height="109dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,36 +59,38 @@
         android:id="@+id/Bluesettings"
         android:layout_width="310dp"
         android:layout_height="80dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rectanglecopysettings"
         android:fontFamily="@font/open_sans_bold"
         android:text="Bluetooth Settings"
         android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/BtnAppSecurity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar5"
+        app:layout_constraintVertical_bias="0.965" />
 
     <Button
         android:id="@+id/BtnAppSecurity"
         android:layout_width="310dp"
         android:layout_height="80dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/rectanglecopysettings"
         android:capitalize="sentences"
         android:fontFamily="@font/open_sans_bold"
         android:text="App Security"
         android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/BtnSwDkMode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Bluesettings" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/BtnAboutSet"
         android:layout_width="310dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/rectanglecopysettings"
         android:fontFamily="@font/open_sans_bold"
         android:text="About"
@@ -102,7 +104,7 @@
         android:id="@+id/BtnSwDkMode"
         android:layout_width="310dp"
         android:layout_height="80dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/setingsbuttontempdark"
         android:fontFamily="@font/open_sans_bold"
         android:text="Switch to Dark Mode"
@@ -111,8 +113,6 @@
         app:layout_constraintBottom_toTopOf="@+id/BtnAboutSet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BtnAppSecurity"
-        app:layout_constraintVertical_bias="0.352" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

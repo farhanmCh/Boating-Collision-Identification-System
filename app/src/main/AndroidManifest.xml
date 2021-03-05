@@ -41,7 +41,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".home_2" />
-        <activity android:name=".LiDAR" />
+        <activity android:name=".LiDAR"
+                  android:screenOrientation="landscape"/>
         <activity android:name=".AppSecurity" />
         <activity android:name=".AppSettings" />
         <activity android:name=".MainMenu" />
