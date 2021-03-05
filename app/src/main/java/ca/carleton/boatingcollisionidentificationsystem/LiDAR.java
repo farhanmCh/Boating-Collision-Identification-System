@@ -3,6 +3,7 @@ package ca.carleton.boatingcollisionidentificationsystem;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -43,7 +44,10 @@ import ca.carleton.boatingcollisionidentificationsystem.tflite.TFLiteObjectDetec
 
 public class LiDAR extends AppCompatActivity {
     private static final String TAG = "LiDAR";
-    Button btn;
+    Button StartBtn;
+    Button StopBtn;
+    Button MLstart;
+    Button ResetBtn;
     ImageView image;
     TextView newmessage;
     String data;
@@ -61,6 +65,9 @@ public class LiDAR extends AppCompatActivity {
     private static final String TF_OD_API_MODEL_FILE = "lidarDetect.tflite";
     private static final String TF_OD_API_LABELS_FILE = "label_map.txt";
     private static final LiDAR.DetectorMode MODE = LiDAR.DetectorMode.TF_OD_API;
+    public static String LIDAR_MONITOR_START = "com.boating-collision-identification-system.LIDAR_MONITOR_START";
+    public static String LIDAR_MONITOR_STOP = "com.boating-collision-identification-system.LIDAR_MONITOR_STOP";
+
     // Minimum detection confidence to track a detection.
     private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
     private static final boolean MAINTAIN_ASPECT = false;
@@ -79,10 +86,15 @@ public class LiDAR extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lidar);
 
-        btn = (Button) findViewById(R.id.button2);
+        StartBtn = (Button) findViewById(R.id.button2);
+        StopBtn =  (Button) findViewById(R.id.button4);
+        MLstart = (Button) findViewById(R.id.mlstart);
+        ResetBtn = (Button) findViewById(R.id.resetbt);
         image = (ImageView) findViewById(R.id.image2);
         newmessage = (TextView) findViewById(R.id.Newmessage);
         detectedObjects = (TextView) findViewById(R.id.ObjectName);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         if (!Python.isStarted()) {
             Python.start(new AndroidPlatform(this));
@@ -126,9 +138,18 @@ public class LiDAR extends AppCompatActivity {
             }
         }
 
-        btn.setOnClickListener(new View.OnClickListener() {
+
+        ResetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                Intent intent = new Intent(LiDAR.this, LiDAR.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+        MLstart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
                 String arr = null;
                 BufferedReader br = null;
@@ -166,7 +187,9 @@ public class LiDAR extends AppCompatActivity {
                 PyObject scriptObj = py.getModule("lidarsoftware"); // Read python script
                 PyObject funcObj = scriptObj.callAttr("plot", arr);    // Invoke plot() function
 
-                /*
+
+
+
                 try {
                     String str = funcObj.toString();
                     byte[] data = android.util.Base64.decode(str, Base64.DEFAULT);
@@ -177,7 +200,8 @@ public class LiDAR extends AppCompatActivity {
                     System.out.println(e);
                 }
 
-                 */
+
+
                 try {
                     //Bitmap bitmap = getBitmapFromAssets("bikefront17.png");
                     String str = funcObj.toString();
@@ -287,6 +311,24 @@ public class LiDAR extends AppCompatActivity {
                 catch (Exception e){
                     System.out.println(e);
                 }
+            }
+        });
+        StartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent startLidar = new Intent(LIDAR_MONITOR_START);
+                sendBroadcast(startLidar);
+
+
+            }
+        });
+
+        StopBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent stopLidar = new Intent(LIDAR_MONITOR_STOP);
+                sendBroadcast(stopLidar);
             }
         });
     }
