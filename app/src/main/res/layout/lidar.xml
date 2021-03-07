@@ -7,127 +7,120 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="505dp"
-        android:layout_height="807dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/imageView13"
+        android:layout_width="924dp"
+        android:layout_height="493dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/lidarbgimgag" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar3"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/actionbartop"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/tabmenu3"
-        android:layout_width="43dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/tabmenuselect_android"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
-        app:layout_constraintStart_toEndOf="@+id/lockapp2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/lockapp3"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576" />
-
-    <ImageView
-        android:id="@+id/image2"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_marginTop="96dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+        app:layout_constraintVertical_bias="0.89"
+        app:srcCompat="@drawable/lidarbgimgagrot" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="96dp"
-        android:layout_height="wrap_content"
+        android:layout_width="67dp"
+        android:layout_height="37dp"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="12dp"
-        android:text="Plot"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image2" />
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="152dp"
+        android:text="START"
+        app:layout_constraintStart_toEndOf="@+id/image2"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/DetectedObject"
-        android:layout_width="47dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="48dp"
-        android:text="Object:"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/image2"
-        app:layout_constraintStart_toStartOf="parent" />
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="544dp"
+        android:layout_height="326dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.494" />
 
     <TextView
         android:id="@+id/Newmessage"
-        android:layout_width="61dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="4dp"
+        android:layout_width="59dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="4dp"
         android:text="TextView"
         android:textColor="#10FF00"
-        app:layout_constraintStart_toEndOf="@+id/Proximity"
-        app:layout_constraintTop_toBottomOf="@+id/DetectedObject" />
-
-    <TextView
-        android:id="@+id/ObjectName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="48dp"
-        android:text="TextView"
-        android:textColor="#10FF00"
-        app:layout_constraintBottom_toTopOf="@+id/image2"
-        app:layout_constraintStart_toEndOf="@+id/DetectedObject" />
+        app:layout_constraintStart_toEndOf="@+id/image2"
+        app:layout_constraintTop_toBottomOf="@+id/Proximity" />
 
     <TextView
         android:id="@+id/Proximity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="4dp"
         android:text="Proximity:"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image2"
+        app:layout_constraintTop_toBottomOf="@+id/ObjectName" />
+
+    <TextView
+        android:id="@+id/DetectedObject"
+        android:layout_width="47dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:text="Object:"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/image2"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+    <TextView
+        android:id="@+id/ObjectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="2dp"
+        android:text="TextView"
+        android:textColor="#10FF00"
+        app:layout_constraintStart_toEndOf="@+id/image2"
         app:layout_constraintTop_toBottomOf="@+id/DetectedObject" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="67dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="36dp"
+        android:text="STOP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image2"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintVertical_bias="0.07" />
+
+    <Button
+        android:id="@+id/mlstart"
+        android:layout_width="67dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="12dp"
+        android:text="ML Start"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/image2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99" />
+
+    <Button
+        android:id="@+id/resetbt"
+        android:layout_width="67dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="20dp"
+        android:text="reset"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/mlstart"
+        app:layout_constraintStart_toEndOf="@+id/image2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

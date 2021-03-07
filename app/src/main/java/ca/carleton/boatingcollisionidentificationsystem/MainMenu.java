@@ -25,6 +25,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
             startActivityForResult(enableBtIntent,1);
         }
 
+
+
         Button buttonMonitor = (Button) findViewById(R.id.mainmonitor);
         buttonMonitor.setOnClickListener(this);
         Button buttonSettings = (Button) findViewById(R.id.AppSet);
@@ -34,17 +36,13 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         Button buttonMaps = (Button) findViewById(R.id.gps);
         buttonMaps.setOnClickListener(this);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);                                                       // ToolBar
+        Toolbar toolbar = findViewById(R.id.toolbar); // ToolBar
         setSupportActionBar(toolbar);
-
-        BluetoothDevice hc05 = mBluetoothAdapter.getRemoteDevice("00:14:03:05:0A:0D");
 
         startService(new Intent(this,BluetoothService.class));
 
     }
     public void onClick(View v){
-        char[] test = {'\n','b','a'};
-        //Begin Bluetooth Connection
 
         switch (v.getId()){
 

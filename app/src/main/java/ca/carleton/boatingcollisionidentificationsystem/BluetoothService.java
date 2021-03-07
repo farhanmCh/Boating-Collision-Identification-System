@@ -20,7 +20,7 @@ import java.util.UUID;
 
 
 public class BluetoothService extends Service {
-    public String TAG = "LiDAR";
+    public String TAG = "BlueTooth";
     public static final UUID mUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     public static BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     public BluetoothDevice hc05 = mBluetoothAdapter.getRemoteDevice("00:14:03:05:0A:0D");
@@ -34,6 +34,8 @@ public class BluetoothService extends Service {
         IntentFilter filter = new IntentFilter();
         filter.addAction(ArmControlCentre.ARM_CONTROL_LEFT);
         filter.addAction(ArmControlCentre.ARM_CONTROL_RIGHT);
+        filter.addAction(LiDAR.LIDAR_MONITOR_START);
+        filter.addAction(LiDAR.LIDAR_MONITOR_STOP);
 
         registerReceiver(receiver, filter);
 
@@ -93,11 +95,10 @@ public class BluetoothService extends Service {
                         }
                         Log.d(TAG, "DataStream " + msg);
                         Intent incomingMessageIntent = new Intent(BluetoothService.this, LiDAR.class);
-                        incomingMessageIntent.putExtra("theMessage", incomingMessage);
                         incomingMessageIntent.putExtra("theMessage", msg);
 
                         incomingMessageIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        incomingMessageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        incomingMessageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //Clear top of the stack activity (previous LiDAR page)
                         startActivity(incomingMessageIntent);
 
                     } catch (IOException e) {
@@ -125,18 +126,30 @@ public class BluetoothService extends Service {
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String Direction = intent.getAction();
+            String Instruction = intent.getAction();
             Log.i(TAG, "Broadcast received");
-            assert Direction != null;
-            if(Direction.equals(ArmControlCentre.ARM_CONTROL_LEFT)){
+            assert Instruction != null;
+            if(Instruction.equals(ArmControlCentre.ARM_CONTROL_LEFT)){
                 try {
                     mmOutputStream.write("l\n".getBytes());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else if(Direction.equals(ArmControlCentre.ARM_CONTROL_RIGHT)){
+            }else if(Instruction.equals(ArmControlCentre.ARM_CONTROL_RIGHT)){
                 try {
                     mmOutputStream.write("r\n".getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if(Instruction.equals(LiDAR.LIDAR_MONITOR_START)){
+                try {
+                    mmOutputStream.write("1\n".getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if(Instruction.equals(LiDAR.LIDAR_MONITOR_STOP)){
+                try {
+                    mmOutputStream.write("2\n".getBytes());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
