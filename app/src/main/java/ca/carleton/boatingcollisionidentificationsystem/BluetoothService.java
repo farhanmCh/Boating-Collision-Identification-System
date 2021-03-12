@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
@@ -36,6 +37,7 @@ public class BluetoothService extends Service {
         filter.addAction(ArmControlCentre.ARM_CONTROL_RIGHT);
         filter.addAction(LiDAR.LIDAR_MONITOR_START);
         filter.addAction(LiDAR.LIDAR_MONITOR_STOP);
+        filter.addAction(HardwareInfo.BATTERY_MONITOR_START);
 
         registerReceiver(receiver, filter);
 
@@ -79,6 +81,7 @@ public class BluetoothService extends Service {
                 String incomingMessage = "";
                 while (true) {
                     Log.d(TAG, "Entered While loop");
+                    int count = 0;
                     try {
                         // Keep listening to the InputStream until an exception occurs
                         String msg = "";
@@ -92,14 +95,24 @@ public class BluetoothService extends Service {
                             bytes = mmInputStream.read(buffer);
                             incomingMessage = new String(buffer, 0, bytes);
                             Log.d(TAG, "InputStream: " + incomingMessage);
+                            count++;
                         }
                         Log.d(TAG, "DataStream " + msg);
+                        Intent incomingBattVIntent = new Intent(BluetoothService.this, HardwareInfo.class);
+                        incomingBattVIntent.putExtra("theVoltage", msg);
                         Intent incomingMessageIntent = new Intent(BluetoothService.this, LiDAR.class);
                         incomingMessageIntent.putExtra("theMessage", msg);
 
-                        incomingMessageIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        incomingMessageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //Clear top of the stack activity (previous LiDAR page)
-                        startActivity(incomingMessageIntent);
+                        if(count <=2){
+                            incomingBattVIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            incomingBattVIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(incomingBattVIntent);
+                        }else{
+                            incomingMessageIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            incomingMessageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //Clear top of the stack activity (previous LiDAR page)
+                            startActivity(incomingMessageIntent);
+                        }
+
 
                     } catch (IOException e) {
                         break;
@@ -150,6 +163,12 @@ public class BluetoothService extends Service {
             }else if(Instruction.equals(LiDAR.LIDAR_MONITOR_STOP)){
                 try {
                     mmOutputStream.write("2\n".getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if(Instruction.equals(HardwareInfo.BATTERY_MONITOR_START)){
+                try {
+                    mmOutputStream.write("3\n".getBytes());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
