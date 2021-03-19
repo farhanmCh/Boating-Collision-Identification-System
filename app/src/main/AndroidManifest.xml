@@ -47,7 +47,8 @@
         <activity android:name=".AppSettings" />
         <activity android:name=".MainMenu" />
         <activity android:name=".About" />
-        <activity android:name=".ArmControlCentre" >
+        <activity android:name=".ArmControlCentre" />
+        <activity android:name=".HardwareInfo" >
             <intent-filter>
                 <action android:name="com.boating-collision-identification-system.DIRECTION" />
             </intent-filter>
