@@ -146,6 +146,8 @@ public class LiDAR extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
+
+            
         });
         MLstart.setOnClickListener(new View.OnClickListener() {
             @Override
