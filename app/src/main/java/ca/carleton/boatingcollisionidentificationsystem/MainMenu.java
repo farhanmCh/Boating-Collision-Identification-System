@@ -35,9 +35,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         buttonArmControl.setOnClickListener(this);
         Button buttonMaps = (Button) findViewById(R.id.gps);
         buttonMaps.setOnClickListener(this);
+        Button buttonStats = (Button) findViewById(R.id.stats);
+        buttonStats.setOnClickListener(this);
 
-        Toolbar toolbar = findViewById(R.id.toolbar); // ToolBar
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar); // ToolBar
+        //setSupportActionBar(toolbar);
 
         startService(new Intent(this,BluetoothService.class));
 
@@ -63,6 +65,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
             case R.id.armcontrol:
                 Intent intent3 = new Intent(MainMenu.this, ArmControlCentre.class);
                 startActivity(intent3);
+                break;
+
+            case R.id.stats:
+                Intent intent4 = new Intent(MainMenu.this, HardwareInfo.class);
+                startActivity(intent4);
                 break;
 
             default:
