@@ -14,9 +14,12 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.UUID;
 
 
@@ -24,7 +27,7 @@ public class BluetoothService extends Service {
     public String TAG = "BlueTooth";
     public static final UUID mUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     public static BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-    public BluetoothDevice hc05 = mBluetoothAdapter.getRemoteDevice("00:14:03:05:0A:0D");
+    public BluetoothDevice hc05 = mBluetoothAdapter.getRemoteDevice("00:14:03:05:08:80");
     public BluetoothSocket mSocket = null;
     public InputStream mmInputStream;
     public OutputStream mmOutputStream;
@@ -76,32 +79,75 @@ public class BluetoothService extends Service {
             @Override
             public void run() {
                 byte[] buffer = new byte[1024];
+                BufferedReader br = null;
                 int bytes;
+                String[][] arr = new String[102][201];
+                int idx = 0;
+                int idx_new;
+                int idy = 0;
+                StringBuilder sb = new StringBuilder();
 
                 String incomingMessage = "";
                 while (true) {
-                    Log.d(TAG, "Entered While loop");
                     int count = 0;
+                    Log.d(TAG, "Entered While loop");
                     try {
+                        idx = 0;
+                        Log.d(TAG, "Entered Try");
                         // Keep listening to the InputStream until an exception occurs
-                        String msg = "";
+                        int msg;
                         // Read from the InputStream
-                        bytes = mmInputStream.read(buffer);        // Get number of bytes and message in "buffer"
-                        incomingMessage = new String(buffer, 0, bytes);
-                        Log.d(TAG, "InputStream: " + incomingMessage);
+                        br = new BufferedReader(new InputStreamReader(mmInputStream));
+                        incomingMessage = br.readLine();
+                        Log.d(TAG, "InputStream1: " + incomingMessage);
 
-                        while (!incomingMessage.contains("#")) {
-                            msg = msg.concat(incomingMessage);
-                            bytes = mmInputStream.read(buffer);
-                            incomingMessage = new String(buffer, 0, bytes);
-                            Log.d(TAG, "InputStream: " + incomingMessage);
+
+                        while (!incomingMessage.contains("-20000") && idy != arr.length) {
+                            if (incomingMessage.contains("-10000")) {
+                                //Log.d(TAG, "idx0: " + idx + ", idy0: " + idy);
+                                while (idx < arr[0].length){
+                                    Log.d(TAG, "second loop. idx:  " + idx);
+                                    arr[idy][idx] = "0";
+                                    idx += 1;
+                                }
+                                Log.d(TAG, "New line");
+                            }else if(incomingMessage.length() < 6){
+                                Log.d(TAG, "Bad data");
+                                Log.d(TAG, "idx2: " + idx + ", idy2: " + idy);
+                            }else{
+                                idx_new = Integer.parseInt(incomingMessage.substring(0,3));
+                                if (idx > idx_new){
+                                    while(idx < arr[0].length){
+                                        arr[idy][idx] = "0";
+                                        idx += 1;
+                                        Log.d(TAG, "first loop. idx: " + idx + ", idx_new: " + idx_new);
+                                    }
+                                    idy += 1;
+                                    idx = 0;
+                                }
+                                while (idx < idx_new){
+                                    Log.d(TAG, "second loop. idx:  " + idx+ ", idx_new: " + idx_new);
+                                    arr[idy][idx] = "0";
+                                    idx += 1;
+                                }
+
+                                arr[idy][idx] =  Integer.toString(Math.min(Math.max(Integer.parseInt(incomingMessage.substring(3,6).replaceFirst("^0+(?!$)", "")), 0),200));
+                                idx += 1;
+                            }
+
+                            Log.d(TAG, "InputStream2: " + incomingMessage);
+                            br = new BufferedReader(new InputStreamReader(mmInputStream));
+                            incomingMessage = br.readLine();
                             count++;
+                            Log.d(TAG, "InputStream3: " + incomingMessage);
                         }
-                        Log.d(TAG, "DataStream " + msg);
+
+                        Log.d(TAG, "idxFinal: " + idx + ", idyFinal: " + idy);
+                        Log.d(TAG, "DataStream " + Arrays.deepToString(arr));
                         Intent incomingBattVIntent = new Intent(BluetoothService.this, HardwareInfo.class);
-                        incomingBattVIntent.putExtra("theVoltage", msg);
+                        incomingBattVIntent.putExtra("theVoltage", Arrays.deepToString(arr));
                         Intent incomingMessageIntent = new Intent(BluetoothService.this, LiDAR.class);
-                        incomingMessageIntent.putExtra("theMessage", msg);
+                        incomingMessageIntent.putExtra("theMessage", Arrays.deepToString(arr));
 
                         if(count <=2){
                             incomingBattVIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
